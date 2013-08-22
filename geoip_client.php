@@ -3,7 +3,7 @@
 
 /**
  * GEO IP function
- * @return array
+ * @return array|bool=false|string
  */
 function geoip_redis($r, $ip, $return_country_string = false)
 {
