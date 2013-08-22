@@ -46,7 +46,7 @@ function geoip_redis($r, $ip, $return_country_string = false)
 
 
 $r = new Redis();
-$r->connect("localhost");
+$r->connect('localhost');
 print_r( geoip_redis($r, '194.145.63.0') );
 
 		
