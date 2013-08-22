@@ -5,11 +5,11 @@
  * GEO IP function
  * @return array|bool=false|string
  */
-function geoip_redis($r, $ip, $return_country_string = false)
+function geoip_redis($r, $ip = 0, $country_only = false)
 {
 	$ipnum = (int) ip2long($ip);
-	if (!$ipnum) { return false; }
-
+	if ($ipnum == 0) { return false; }
+	
 	$res = $r->zrangebyscore(
 		'geoip', 
 		$ipnum, 
@@ -35,7 +35,7 @@ function geoip_redis($r, $ip, $return_country_string = false)
 	$key = 'geoip:' . $id;
 	$data = $r->hgetall($key);
 
-	if ($return_country_string)
+	if ($country_only)
 	{
 		return strtoupper($data['code']);
 	}
