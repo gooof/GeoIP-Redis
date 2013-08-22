@@ -5,7 +5,7 @@
  * GEO IP function
  * @return array|bool=false|string
  */
-function geoip_redis($r, $ip = 0, $country_only = false)
+function geoip_redis($r, $ip = 0, $return_country_string = false)
 {
 	$ipnum = (int) ip2long($ip);
 	if ($ipnum == 0) { return false; }
@@ -35,7 +35,7 @@ function geoip_redis($r, $ip = 0, $country_only = false)
 	$key = 'geoip:' . $id;
 	$data = $r->hgetall($key);
 
-	if ($country_only)
+	if ($return_country_string)
 	{
 		return strtoupper($data['code']);
 	}
