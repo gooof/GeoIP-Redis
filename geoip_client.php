@@ -9,7 +9,7 @@ function geoip_redis($r, $ip = 0, $return_country_string = false)
 {
 	$ipnum = (int) ip2long($ip);
 	if ($ipnum <= 0) { return false; }
-	
+
 	$res = $r->zrangebyscore(
 		'geoip', 
 		$ipnum, 
@@ -38,6 +38,11 @@ function geoip_redis($r, $ip = 0, $return_country_string = false)
 	if ($return_country_string)
 	{
 		return strtoupper($data['code']);
+	}
+
+	if (!is_array($data))
+	{
+		return false;
 	}
 
 	return $data;
